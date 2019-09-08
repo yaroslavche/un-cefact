@@ -1,137 +1,54 @@
-# 
-[![Build Status](https://travis-ci.org/yaroslavche/uncefact.svg?branch=master)](https://travis-ci.org/yaroslavche/uncefact)
-[![License](https://poser.pugx.org/yaroslavche/uncefact/license?format=flat)](https://packagist.org/packages/yaroslavche/uncefact)
-[![Latest Stable Version](https://poser.pugx.org/yaroslavche/uncefact/v/stable?format=flat)](https://packagist.org/packages/yaroslavche/uncefact)
-[![PHP Version](https://img.shields.io/packagist/php-v/yaroslavche/uncefact/dev-master)](https://www.php.net/)
+# UN/CEFACT PHP 
+[![Build Status](https://travis-ci.org/yaroslavche/un-cefact.svg?branch=master)](https://travis-ci.org/yaroslavche/un-cefact)
+[![License](https://poser.pugx.org/yaroslavche/un-cefact/license?format=flat)](https://packagist.org/packages/yaroslavche/un-cefact)
+[![Latest Stable Version](https://poser.pugx.org/yaroslavche/un-cefact/v/stable?format=flat)](https://packagist.org/packages/yaroslavche/un-cefact)
+[![PHP Version](https://img.shields.io/packagist/php-v/yaroslavche/un-cefact/dev-master)](https://www.php.net/)
 
-
-Clean PHP project with dev tools.
+[Introduction](https://www.unece.org/cefact.html)
+> The United Nations Centre for Trade Facilitation and Electronic Business (UN/CEFACT) is a subsidiary, intergovernmental body of the United Nations Economic Commission for Europe (UNECE) which serves as a focal point within the United Nations Economic and Social Council for trade facilitation recommendations and electronic business standards. It has global membership and its members are experts from intergovernmental organizations, individual countries' authorities and also from the business community.
 
 ## Installation
-
-Download and install
 ```bash
-$ composer create-project yaroslavche/uncefact projectName --prefer-source
+$ composer require yaroslavche\un-cefact
 ```
 
-or manually
+## Usage
+```php
+<?php
+use Yaroslavche\UnCefact\CommonCode\CommonCodeInterface;
+use Yaroslavche\UnCefact\CommonCode\NoUnit;
+use Yaroslavche\UnCefact\CommonCode\SpaceAndTime\Radian;
+use Yaroslavche\UnCefact\CommonCodeFactory;
+use Yaroslavche\UnCefact\UnCefact;
 
-```bash
-$ git clone yaroslavche/uncefact
-$ composer install --prefer-source
+NoUnit::COMMON_CODE; // 'C62'
+NoUnit::CONVERSION_FACTOR; // '1'
+NoUnit::DESCRIPTION; // 'Synonym: unit'
+NoUnit::GROUP_ID; // null
+NoUnit::GROUP_NUMBER; // null
+NoUnit::LEVEL; // '1'
+NoUnit::NAME; // 'one'
+NoUnit::QUANTITY; // null
+NoUnit::SECTOR; // null
+NoUnit::STATUS; // null
+NoUnit::SYMBOL; // '1'
+
+$radian = new Radian();
+$radian->getCommonCode(); // 'C81'
+$radian->getConversionFactor(); // 'rad';
+$radian->getDescription(); // null
+$radian->getGroupId(); // 2
+$radian->getGroupNumber(); // 1
+$radian->getLevel(); // '1'
+$radian->getName(); // 'radian'
+$radian->getQuantity(); // 'angle (plane)'
+$radian->getSector(); // 'Space and Time'
+$radian->getStatus(); // null
+$radian->getSymbol(); // 'rad'
+
+/** @var string $angleDegreeClass FQCN */
+$angleDegreeClass = UnCefact::DD; // AngleDegree::class
+/** @var CommonCodeInterface $angleDegree */
+$angleDegree = CommonCodeFactory::get($angleDegreeClass); // AngleDegree::class object
+$angleDegree = new $angleDegreeClass(); // eq
 ```
-
-<details>
-  <summary>Post cmd</summary>
-  
-  In `composer.json` you can see `post-install-cmd` and `post-create-project-cmd`, which will: 
-   - ask needed information
-   - change `composer.json`
-   - replace all occurrences (vendor, package) in `README.md`
-   - uncomment lines in `.gitattributes`
-   - remove self in `composer.json` (if remove installer after complete)
-   - remove installer (whole `internal` directory, by default)
-</details>
-
-## Tools
-
-<details>
-  <summary>PHP_CodeSniffer</summary>
-    
-  [squizlabs/PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)
-  > PHP_CodeSniffer is a set of two PHP scripts; the main phpcs script that tokenizes PHP, JavaScript and CSS files to detect violations of a defined coding standard, and a second phpcbf script to automatically correct coding standard violations. PHP_CodeSniffer is an essential development tool that ensures your code remains clean and consistent.
-  
-  Check:
-  ```bash
-  $ composer phpcs
-  ```
-
-  Fix:
-  ```bash
-  $ composer phpcbf
-  ```
-</details>
-
-<details>
-  <summary>PHPMD - PHP Mess Detector</summary>
-    
-  [phpmd/phpmd](https://github.com/phpmd/phpmd)
-  > What PHPMD does is: It takes a given PHP source code base and look for several potential problems within that source. These problems can be things like:
-  > Possible bugs,
-  > Suboptimal code,
-  > Overcomplicated expressions,
-  > Unused parameters, methods, properties.
-
-  
-  ```bash
-  $ composer phpmd
-  ```
-</details>
-
-<details>
-  <summary>PHPStan - PHP Static Analysis Tool</summary>
-  
-  [phpstan/phpstan](https://github.com/phpstan/phpstan)
-  > PHPStan focuses on finding errors in your code without actually running it. It catches whole classes of bugs even before you write tests for the code. It moves PHP closer to compiled languages in the sense that the correctness of each line of the code can be checked before you run the actual line.
-  
-  ```bash
-  $ composer phpstan
-  ```
-</details>
-
-<details>
-  <summary>PHPUnit</summary>
-    
-  [sebastianbergmann/phpunit](https://github.com/sebastianbergmann/phpunit) | [Writing Tests](https://phpunit.readthedocs.io/en/8.3/writing-tests-for-phpunit.html)
-  > PHPUnit is a programmer-oriented testing framework for PHP. It is an instance of the xUnit architecture for unit testing frameworks.
-  
-  Run tests:
-  ```bash
-  $ composer phpunit
-  ```
-  
-  Code coverage
-  ```bash
-  $ composer coverage
-  ```
-  Will show results in console and if success, then generate `build/coverage/html/` directory (see `index.html` in browser) and `build/coverage/clover.xml` (which can be useful in some cases).
-</details>
-
-<details>
-  <summary>Infection - Mutation Testing framework</summary>
-  
-  [infection/infection](https://github.com/infection/infection)
-  > Infection is a PHP mutation testing framework based on AST (Abstract Syntax Tree) mutations. It works as a CLI tool and can be executed from your project’s root.
-  >
-  > Mutation testing is a testing methodology that involves modifying a program in small ways and analyzing reactions of the test suite on these modifications. If tests pass after the code is changed, then we have either not covered line of code or the tests are not very efficient for the mutated piece of code.
-    
-  ```bash
-  $ composer infection
-  ```
-</details>
-
-<details>
-  <summary>Roave Backward Compatibility Check</summary>
-    
-  [Roave/BackwardCompatibilityCheck](https://github.com/Roave/BackwardCompatibilityCheck)
-  > A tool that can be used to verify BC breaks between two versions of a PHP library.
-  >
-  > Backward compatible (or sometimes backward-compatible or backwards compatible) refers to a hardware or software system that can successfully use interfaces and data from earlier versions of the system or with other systems.
- 
-  ```bash
-  $ composer bccheck
-  ```
-</details>
-
-<details>
-  <summary>Roave Security Advisories</summary>
-    
-  [Roave/SecurityAdvisories](https://github.com/Roave/SecurityAdvisories)
-  > Does not provide any API or usable classes: its only purpose is to prevent installation of software with known and documented security issues.
-</details> 
-
-## Travis CI
-[docs](https://docs.travis-ci.com/)
-> Continuous Integration is the practice of merging in small code changes frequently - rather than merging in a large change at the end of a development cycle. The goal is to build healthier software by developing and testing in smaller increments. This is where Travis CI comes in.
-
-If need, uncomment in `.travis.yml` needed checks (lines in `script` section) and [enable travis builds](https://travis-ci.org) for repository.
