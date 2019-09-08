@@ -21,8 +21,8 @@ class UnCefact
         if (!defined($constantFQN)) {
             throw new UndefinedCommonCodeException(sprintf('Undefined Common Code "%s".', $commonCode));
         }
-        $FQCN = constant($constantFQN);
-        return new $FQCN();
+        $classFQN = constant($constantFQN);
+        return new $classFQN();
     }
 
     const C62 = NoUnit::class;

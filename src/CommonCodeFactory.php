@@ -8,14 +8,14 @@ use Yaroslavche\UnCefact\Exception\UndefinedCommonCodeException;
 class CommonCodeFactory
 {
     /**
-     * @param string $FQCN Fully Qualified Class Name
+     * @param string $classFQN Fully Qualified Class Name
      * @return CommonCodeInterface
      */
-    public static function get(string $FQCN): CommonCodeInterface
+    public static function get(string $classFQN): CommonCodeInterface
     {
-        if (!class_exists($FQCN)) {
-            throw new UndefinedCommonCodeException(sprintf('Undefined Fully Qualified Class Name "%s".', $FQCN));
+        if (!class_exists($classFQN)) {
+            throw new UndefinedCommonCodeException(sprintf('Undefined Fully Qualified Class Name "%s".', $classFQN));
         }
-        return new $FQCN();
+        return new $classFQN();
     }
 }
