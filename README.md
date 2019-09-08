@@ -9,7 +9,7 @@
 
 ## Installation
 ```bash
-$ composer require yaroslavche\un-cefact
+$ composer require yaroslavche\un-cefact:dev-master
 ```
 
 ## Usage
