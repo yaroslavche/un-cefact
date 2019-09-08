@@ -18,6 +18,7 @@ matrix:
     - php: 7.4snapshot
       env: NO_INFECTION=1
     - php: nightly
+      env: NO_INFECTION=1
 
 before_install:
   - if [[ $NO_XDEBUG == 1 ]]; then phpenv config-rm xdebug.ini || echo 'No xdebug config.'; fi
