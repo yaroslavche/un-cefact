@@ -62,7 +62,7 @@ class AbstractCommonCode implements CommonCodeInterface
         return static::CONVERSION_FACTOR;
     }
 
-    public function getSymbol(): string
+    public function getSymbol(): ?string
     {
         return static::SYMBOL;
     }

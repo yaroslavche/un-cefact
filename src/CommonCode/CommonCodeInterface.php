@@ -22,7 +22,7 @@ interface CommonCodeInterface
 
     public function getConversionFactor(): string;
 
-    public function getSymbol(): string;
+    public function getSymbol(): ?string;
 
     public function getDescription(): ?string;
 }

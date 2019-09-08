@@ -5,7 +5,13 @@ namespace Yaroslavche\UnCefact;
 
 use Yaroslavche\UnCefact\CommonCode\CommonCodeInterface;
 use Yaroslavche\UnCefact\CommonCode\NoUnit;
-use Yaroslavche\UnCefact\CommonCode\SpaceAndTime\{Microradian, Milliradian, Radian};
+use Yaroslavche\UnCefact\CommonCode\SpaceAndTime\{AngleDegree,
+    AngleMinute,
+    AngleSecond,
+    Grade,
+    Microradian,
+    Milliradian,
+    Radian};
 use Yaroslavche\UnCefact\Exception\UndefinedCommonCodeException;
 
 class UnCefact
@@ -26,4 +32,8 @@ class UnCefact
     const C81 = Radian::class;
     const C25 = Milliradian::class;
     const B97 = Microradian::class;
+    const DD = AngleDegree::class;
+    const D61 = AngleMinute::class;
+    const D62 = AngleSecond::class;
+    const A91 = Grade::class;
 }
