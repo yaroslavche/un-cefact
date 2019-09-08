@@ -67,7 +67,7 @@ class AbstractCommonCode implements CommonCodeInterface
         return static::SYMBOL;
     }
 
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return static::DESCRIPTION;
     }

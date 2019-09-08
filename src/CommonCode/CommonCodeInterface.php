@@ -24,5 +24,5 @@ interface CommonCodeInterface
 
     public function getSymbol(): string;
 
-    public function getDescription(): string;
+    public function getDescription(): ?string;
 }
